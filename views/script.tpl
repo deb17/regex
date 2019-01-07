@@ -24,49 +24,18 @@
       setCursor(textNode, 1);
     }
     try {
-      // if (e.data.length) {
-        if (document.querySelector("#testdiv .hilite")) {
-          while (window.getSelection().anchorNode.parentNode.outerHTML.endsWith("</span>")) {
-            //unwrap
-            var node = window.getSelection().anchorNode.parentNode;
-            var pos = window.getSelection().anchorOffset;
-            var parent = node.parentNode;
-            var t = node.firstChild;
-            parent.insertBefore(t, node);
-            parent.removeChild(node);
-            setCursor(t, pos);
-          }
-          // if (window.getSelection().anchorNode.parentNode.outerHTML.endsWith("</span>")) {
-          //   var node = window.getSelection().anchorNode.parentNode;
-          //   if (!(node.classList.contains("hilite"))) {
-          //     //unwrap
-          //     var parent = node.parentNode;
-          //     var t = node.firstChild;
-          //     parent.insertBefore(t, node);
-          //     parent.removeChild(node);
-          //     setCursor(t);
-          //   }
-          //   var node = window.getSelection().anchorNode.parentNode;
-          //   if (node.classList.contains("hilite")) {
-          //     var pos = window.getSelection().anchorOffset;
-          //     var text = node.textContent;
-          //     if (pos == text.length) {
-          //       var newText = text.slice(0, -1);
-          //       node.innerHTML = newText;
-          //       var t = document.createTextNode(text.slice(-1));
-          //       node.parentNode.insertBefore(t, node.nextSibling);
-          //       setCursor(t);
-          //     } else if (pos == 1) { 
-          //       var newText = text.slice(1);
-          //       node.innerHTML = newText;
-          //       var t = document.createTextNode(text[0]);
-          //       node.parentNode.insertBefore(t, node);
-          //       setCursor(t);
-          //     }
-          //   }
-          // }
+      if (document.querySelector("#testdiv .hilite")) {
+        // unwrap text in nested span tags
+        while (window.getSelection().anchorNode.parentNode.outerHTML.endsWith("</span>")) {
+          var node = window.getSelection().anchorNode.parentNode;
+          var pos = window.getSelection().anchorOffset;
+          var parent = node.parentNode;
+          var t = node.firstChild;
+          parent.insertBefore(t, node);
+          parent.removeChild(node);
+          setCursor(t, pos);
         }
-      // }
+      }
     }
     catch(err) {}
   }

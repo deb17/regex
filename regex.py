@@ -1,7 +1,40 @@
+'''This module performs operations related to the re module.
+
+Its functions are:
+
+    run_re - Run the requested re and format the input data with
+             highlighting.
+    check_re - Check if the re is valid (can be compiled).
+    clean_data - Remove all span tags from the input test data.
+    get_flags_value - Calculate the binary OR of the flags.
+    get_modified_data - Format the input test data with highlighting.
+    modify_input - Helper function to copy data from input to output.
+    format_result - Format result part of the page for proper display.
+
+NOTE - In this webapp, I have decided to handle the highlighting myself
+instead of using a third-party jquery plugin which is also an option.
+One issue with jquery plugins is that they change the style of the
+textarea, so a number of changes are necessary to make it match
+bootstrap style.
+'''
+
 import re
 import html
 
 def run_re(pattern, flags, testdata, modify='Y'):
+    '''Run the search method on the compiled re and format the test
+    data with highlighting.
+
+    1. Prepare the test data coming from the content editable div for
+    searching. Remove div, br and span tags and introduce newlines.
+    Replace non-breaking space with space character.
+
+    2. Compile and run the search method. Format the result by escaping
+    <, >, &, quote characters and introducing non-breaking spaces.
+
+    3. Run the finditer method on the regex to get all matches and
+    format the data with span tags to show highlighting.
+    '''
 
     origdata = testdata
     print('origdata', repr(origdata))
@@ -46,6 +79,7 @@ def run_re(pattern, flags, testdata, modify='Y'):
     return result, mod_data
 
 def check_re(pattern, flags):
+    '''Compile the re to check its validity.'''
 
     calc_val = get_flags_value(flags)
     try:
@@ -56,6 +90,9 @@ def check_re(pattern, flags):
     return True
 
 def clean_data(data):
+    '''Remove span tags introduced by this module and those inserted
+    automatically by the contenteditable div.
+    '''
 
     data = re.sub(r'<span(.*?)>', '', data)
     data = data.replace('</span>', '')
@@ -63,6 +100,12 @@ def clean_data(data):
     return data
 
 def get_flags_value(flags):
+    '''Calculate bitwise OR of flags. Flags considered are -
+    IGNORECASE, DOTALL, VERBOSE, ASCII, MULTILINE.
+    LOCALE flag has been ignored because the official HOWTO for
+    Regular Expressions discourages its use. Also this flag would affect
+    the server and not the client.
+    '''
 
     val = 0
 
@@ -80,6 +123,25 @@ def get_flags_value(flags):
     return val
 
 def get_modified_data(data, it):
+    '''Format the test data string used in the re search with HTML tags.
+
+    1. Read the input (in data variable) character by character. See
+    docstring for modify_input function.
+
+    2. If match object starts starts at a character, introduce a span
+    tag with class hilite in the output (the modified variable).
+
+    3. If match object ends at a character, introduce closing span tag.
+
+    4. Take care to close the span tag and start a new span if a newline
+    is encountered when a span tag has not yet been closed.
+
+    5. Replace all spaces by non-breaking spaces.
+
+    6. When iterator is exhausted, copy remaining input to output.
+
+    7. Introduce opening and closing div tags where there are newlines.
+    '''
 
     modified = ''
     cnt = 0
@@ -129,6 +191,8 @@ def get_modified_data(data, it):
     if not first:
         output += '</div>'
 
+    # introduce br tags to effect blank lines.
+
     output = output.replace('<div></div>', '<div><br></div>')
     output = output.replace('<div><span class="hilite"></span></div>',
                             '<div><span class="hilite"><br></span></div>')
@@ -138,6 +202,12 @@ def get_modified_data(data, it):
     return output
 
 def modify_input(modified, data, cnt):
+    '''Copy input character to output, taking care copy escaped
+    characters. It is necessary to escape the test data before modifying
+    it because once the tags are introduced, the data cannot be escaped.
+
+    Introduce non-breaking spaces.
+    '''
 
     charrefs = ('&lt;', '&gt;', '&amp;')
 
@@ -154,8 +224,11 @@ def modify_input(modified, data, cnt):
     return modified, cnt
 
 def format_result(data):
+    '''Format result (whole match, groups and group dict) for displaying
+    on a webpage.
+    '''
 
-    if not data: return data
+    if not data: return data  # data may be None
 
     data = html.escape(data)
     data = data.replace(' ', '&nbsp;')

@@ -80,7 +80,7 @@ def index_get():
     if not aaa.user_is_anonymous:
         return bottle.redirect('/home')
 
-    _ = get_session_data()
+    _ = get_session_data()  # delete saved session data, if any
 
     return bottle.template('index',
                            result=None,
