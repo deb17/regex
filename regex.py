@@ -16,6 +16,10 @@ instead of using a third-party jquery plugin which is also an option.
 One issue with jquery plugins is that they change the style of the
 textarea, so a number of changes are necessary to make it match
 bootstrap style.
+
+TO-DO - Change every 2 spaces in testdiv and results part to a space and
+        an nbsp . Use `word-break: break-word` and - for firefox -
+        `overflow-wrap: break-word` in the css.
 '''
 
 import re
@@ -42,7 +46,11 @@ def run_re(pattern, flags, testdata, modify='Y'):
     testdata = testdata.replace('</span>', '')
     if testdata.startswith('<div>'):
         testdata = testdata[5:]
-    testdata = testdata.replace('<br>', '') # Firefox introduces <br>
+
+    # Firefox introduces <br>. <br> is also present with <div> on blank
+    # lines.
+    testdata = testdata.replace('<br>', '')
+
     testdata = testdata.replace('<div>', '\n')
     testdata = testdata.replace('</div>', '')
     # testdata = re.sub(r'<div>(.*?)</div>', r'\n\1', testdata)
