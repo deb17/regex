@@ -8,7 +8,6 @@
   }
 </style>
 
-<!-- <div class="col-sm-7 mt-2" id="cboxes"> -->
 <div class="{{ cls }}" id="cboxes">
   <input type="checkbox" name="icase" id="icase" {{ 'checked' if flags[0] == 'i' else '' }}>
   <label for="icase" class="cbox mr-3">IGNORECASE</label>

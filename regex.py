@@ -19,7 +19,9 @@ bootstrap style.
 
 TO-DO - Change every 2 spaces in testdiv and results part to a space and
         an nbsp . Use `word-break: break-word` and - for firefox -
-        `overflow-wrap: break-word` in the css.
+        `overflow-wrap: break-word` in the css. Replace ' <' with
+        '&nbsp;<' to preserve spaces - may not be required in the
+        results part.
 '''
 
 import re

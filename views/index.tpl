@@ -10,16 +10,11 @@
     color: gray;
     cursor: text;
   }
-  /*#test div:empty:focus::before {
-    content: "";
-  }*/
   #test textarea {
     display: none;
   }
   span.hilite {
-    /*display: inline-block;*/
     background-color: yellow;
-    /*width: min-content;*/
   }
   .resultPara {
     word-break: break-all;
@@ -29,8 +24,7 @@
 <div class="container mt-3">
   <div class="jumbotron mb-3">
     <h1 id="jumbo-h1" class="d-none d-sm-block display-4">Test your Regular Expressions</h1>
-    <h2 id="jumbo-h1" class="d-block d-sm-none">Test your Regular Expressions</h1>
-    <!-- <h1 id="jumbo-h1">Test your Regular Expressions</h1> -->
+    <h2 id="jumbo-h1" class="d-block d-sm-none">Test your Regular Expressions</h2>
     <p class="lead"><a id="jumbo-link" href="https://pyvideo.org/pycon-us-2017/yes-its-time-to-learn-regular-expressions.html" target="_blank">Learn more about them</a></p>
     <p class="lead">Test your Python regular expression against a string below.</p>
     <hr class="my-4">
