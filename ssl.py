@@ -8,8 +8,9 @@ class SSLify:
               environ.get('HTTP_X_FORWARDED_PROTO'))
         print(environ)
         if environ.get('HTTP_X_FORWARDED_PROTO') == 'http':
-            newurl = ('https://' + environ.get('HTTP_HOST') +
-                      environ.get('PATH_INFO'))
-            return bottle.redirect(newurl)
+            environ['HTTP_X_FORWARDED_PROTO'] = 'https'
+            # newurl = ('https://' + environ.get('HTTP_HOST') +
+            #           environ.get('PATH_INFO'))
+            # return bottle.redirect(newurl)
 
         return self.app(environ, start_response)
