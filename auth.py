@@ -7,25 +7,37 @@ from bottle_flash2 import FlashPlugin
 # import requests
 
 DATABASE_URL = os.environ['DATABASE_URL']
+DBNAME = DATABASE_URL.rsplit('/', 1)[1]
+
+MAILID = os.environ['MAILID']
+PASSWORD = os.environ['PASSWORD']
+
+COOKIE_SECRET = os.environ['COOKIE_SECRET']
 
 # SITE_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
 # RECAPTCHA_SECRET = '6LfeHx4UAAAAAFWXGh_xcL0B8vVcXnhn9q_SnQ1b'
 
-logging.basicConfig(format='localhost - - [%(asctime)s] %(message)s',
+logging.basicConfig(format='heroku - - [%(asctime)s] %(message)s',
                     level=logging.DEBUG)
 
 from cork.backends import SqlAlchemyBackend
+
+if not DATABASE_URL.startswith('postgresql'):
+    DATABASE_URL = 'postgresql:' + DATABASE_URL.split(':', 1)[1]
+
 sa = SqlAlchemyBackend(DATABASE_URL,
                        initialize=True,
-                       connect_args={'dbname': 'pyregex'})
-aaa = Cork(smtp_url='starttls://debs.regex:banana1#2@smtp.gmail.com:587',
-           email_sender='debs.regex@gmail.com',
+                       connect_args={'dbname': DBNAME})
+
+SMTP_URL = ('starttls://' + MAILID.split('@')[0] + ':' + PASSWORD
+            + '@smtp.gmail.com:587')
+aaa = Cork(smtp_url=SMTP_URL,
+           email_sender=MAILID,
            backend=sa)
 
 authorize = aaa.make_auth_decorator(fail_redirect="/login", role="user")
 
 app = bottle.Bottle()
-COOKIE_SECRET = 'Colors are smiles of nature.'
 app.install(FlashPlugin(secret=COOKIE_SECRET))
 
 def postd():

@@ -43,7 +43,6 @@ def run_re(pattern, flags, testdata, modify='Y'):
     '''
 
     origdata = testdata
-    print('origdata', repr(origdata))
     testdata = re.sub(r'<span(.*?)>', '', testdata)
     testdata = testdata.replace('</span>', '')
     if testdata.startswith('<div>'):
@@ -85,7 +84,6 @@ def run_re(pattern, flags, testdata, modify='Y'):
         else:
             mod_data = origdata
 
-    print('mod_data', repr(mod_data))
     return result, mod_data
 
 def check_re(pattern, flags):

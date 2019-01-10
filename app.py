@@ -1,4 +1,4 @@
-from collections import namedtuple
+import os
 
 import bottle
 from beaker.middleware import SessionMiddleware
@@ -6,6 +6,7 @@ from beaker.middleware import SessionMiddleware
 from auth import authorize, aaa
 from regex import run_re, check_re, clean_data
 from db import User, Entry, session as orm_session
+from ssl import SSLify
 
 app = bottle.app()
 session_opts = {
@@ -279,4 +280,7 @@ def delete(id):
     return bottle.redirect('/entries')
 
 if __name__ == '__main__':
-    bottle.run(app=app, debug=True, reloader=True)
+    bottle.run(server='paste',
+               app=SSLify(app),
+               host="0.0.0.0",
+               port=int(os.environ.get("PORT", 5000)))
