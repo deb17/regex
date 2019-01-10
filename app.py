@@ -78,7 +78,6 @@ def prepare_data(pattern):
 def index_get():
 
     if bottle.request.headers.get('X-Forwarded-Proto') == 'http':
-        print('INSIDE IF')
         newurl = 'https:' + bottle.request.url.split(':', 1)[1]
         return bottle.redirect(newurl)
 

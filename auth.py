@@ -56,6 +56,10 @@ def sorry_page():
 def login_form():
     """Serve login form"""
 
+    if bottle.request.headers.get('X-Forwarded-Proto') == 'http':
+        newurl = 'https:' + bottle.request.url.split(':', 1)[1]
+        return bottle.redirect(newurl)
+
     if not aaa.user_is_anonymous:
         return bottle.redirect('/home')
 
