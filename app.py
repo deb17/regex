@@ -6,7 +6,6 @@ from beaker.middleware import SessionMiddleware
 from auth import authorize, aaa
 from regex import run_re, check_re, clean_data
 from db import User, Entry, session as orm_session
-from ssl import SSLify
 
 app = bottle.app()
 session_opts = {
@@ -77,6 +76,11 @@ def prepare_data(pattern):
 
 @bottle.route('/')
 def index_get():
+
+    if bottle.request.headers.get('X-Forwarded-Proto') == 'http':
+        print('INSIDE IF')
+        newurl = 'https:' + bottle.request.url.split(':', 1)[1]
+        return bottle.redirect(newurl)
 
     if not aaa.user_is_anonymous:
         return bottle.redirect('/home')
@@ -281,6 +285,6 @@ def delete(id):
 
 if __name__ == '__main__':
     bottle.run(server='paste',
-               app=SSLify(app),
+               app=app,
                host="0.0.0.0",
                port=int(os.environ.get("PORT", 5000)))
