@@ -238,7 +238,7 @@ def format_result(data):
 
     if not data: return data  # data may be None
 
-    data = html.escape(data)
+    data = html.escape(data, quote=False)
     data = data.replace(' ', '&nbsp;')
 
     return data

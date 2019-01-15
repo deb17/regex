@@ -283,6 +283,7 @@ def delete(id):
     return bottle.redirect('/entries')
 
 if __name__ == '__main__':
+    # bottle.run(app=app, debug=True, reloader=True)
     bottle.run(server='paste',
                app=app,
                host="0.0.0.0",
