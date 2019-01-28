@@ -29,8 +29,8 @@ sa = SqlAlchemyBackend(DATABASE_URL,
                        initialize=True,
                        connect_args={'dbname': DBNAME})
 
-SMTP_URL = ('starttls://' + MAILID.split('@')[0] + ':' + PASSWORD
-            + '@smtp.gmail.com:587')
+SMTP_URL = ('starttls://' + MAILID + ':' + PASSWORD
+            + '@smtp-mail.outlook.com:587')
 aaa = Cork(smtp_url=SMTP_URL,
            email_sender=MAILID,
            backend=sa)
