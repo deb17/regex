@@ -44,6 +44,11 @@
         <div name="testdatadiv" id="testdiv" contenteditable="true" spellcheck="false" class="mt-2 mt-sm-0 form-control" placeholder="Test data" maxlength="500" required>{{! testdata }}</div>
         <textarea name="testdata"></textarea>
       </div>
+      <div class="col-lg-2">
+        <button type="button" class="btn btn-info ml-lg-3 mt-2 mt-lg-0" data-toggle="popover" data-placement="top" data-html="true" data-content="">
+        Cheatsheet
+        </button>
+      </div>
     </div>
     <div class="form-row">
       % include('flags.tpl', cls='col-sm-7 mt-2', index=True)

@@ -1,0 +1,196 @@
+<style type="text/css">
+  .shaded {
+    background-color: lightblue;
+  }
+  .popover-body {
+    height: 350px;
+    overflow-y: auto;
+  }
+  @media (max-width: 575px) {
+    .popover-body {
+      height: 200px;
+    }
+  }
+</style>
+
+<h5>Special characters</h5>
+
+<table class="table cheat">
+  <tbody>
+    <tr>
+      <td>.</td>
+      <td>Any character except a newline</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>Beginning of string</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>End of string</td>
+    </tr>
+    <tr>
+      <td>\</td>
+      <td>Escape special character or signal a special sequence</td>
+    </tr>
+    <tr>
+      <td>A|B</td>
+      <td>Matches either <span class="shaded">A</span> or <span class="shaded">B</span>, where <span class="shaded">A</span> and <span class="shaded">B</span> are arbitrary REs</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Quantifiers</h5>
+<table class="table cheat">
+  <tbody>
+    <tr>
+      <td>*</td>
+      <td>0 or more repetitions</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>1 or more repetitions</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>0 or 1 repetitions</td>
+    </tr>
+    <tr>
+      <td class="noShading"><span class="shaded">*?</span>,<span class="shaded">+?</span>,<span class="shaded">??</span></td>
+      <td>Non-greedy or minimal matching</td>
+    </tr>
+    <tr>
+      <td>{m}</td>
+      <td>Exactly m repetitions</td>
+    </tr>
+    <tr>
+      <td>{m,n}</td>
+      <td>m to n repetitions</td>
+    </tr>
+    <tr>
+      <td>{m,n}?</td>
+      <td>Same as above but non-greedy</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Character classes</h5>
+
+<table class="table cheat">
+  <tbody>
+    <tr>
+      <td>[ ]</td>
+      <td>Specifies a set of characters</td>
+    </tr>
+    <tr>
+      <td>[amk]</td>
+      <td>Matches either <span class="shaded">a</span>,<span class="shaded">m</span> or <span class="shaded">k</span></td>
+    </tr>
+    <tr>
+      <td>[a-z]</td>
+      <td>Matches any letter from <span class="shaded">a</span> to <span class="shaded">z</span></td>
+    </tr>
+    <tr>
+      <td class="noShading"><span class="shaded">[a-]</span>,<br><span class="shaded">[-a]</span></td>
+      <td>Matches a or -</td>
+    </tr>
+    <tr>
+      <td>[^abc]</td>
+      <td>Match any character except <span class="shaded">a</span>, <span class="shaded">b</span> or <span class="shaded">c</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Special sequences</h5>
+
+<table class="table cheat">
+  <tbody>
+    <tr>
+      <td>\w</td>
+      <td>Word characters<br><span class="shaded">[a-zA-Z0-9_]</span></td>
+    </tr>
+    <tr>
+      <td>\W</td>
+      <td>Any character that is not a word character, i.e. opposite of <span class="shaded">\w</span></td>
+    </tr>
+    <tr>
+      <td>\s</td>
+      <td>Whitespace character<br><span class="shaded">[ \t\n\r\f\v]</span></td>
+    </tr>
+    <tr>
+      <td>\S</td>
+      <td>Any character that is not a whitespace character, i.e. opposite of <span class="shaded">\s</span></td>
+    </tr>
+    <tr>
+      <td>\d</td>
+      <td>A digit, i.e <span class="shaded">[0-9]</span></td>
+    </tr>
+    <tr>
+      <td>\D</td>
+      <td>Any character that is not a digit, i.e. opposite of <span class="shaded">\d</span></td>
+    </tr>
+    <tr>
+      <td>\A</td>
+      <td>Matches only at the start of the string</td>
+    </tr>
+    <tr>
+      <td>\Z</td>
+      <td>Matches only at the end of the string</td>
+    </tr>
+    <tr>
+      <td>\b</td>
+      <td>Matches the empty string at the start or end of word</td>
+    </tr>
+    <tr>
+      <td>\B</td>
+      <td>Matches the empty string when it is <i>not</i> at the start or end of a word</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Groups</h5>
+
+<table class="table cheat">
+  <tbody>
+    <tr>
+      <td>(...)</td>
+      <td>Matches the RE inside the parentheses and creates a group</td>
+    </tr>
+    <tr>
+      <td>(?:...)</td>
+      <td>Non-capturing group</td>
+    </tr>
+    <tr>
+      <td>(?P&lt;name&gt;...)</td>
+      <td>A named capturing group</td>
+    </tr>
+    <tr>
+      <td>(?#...)</td>
+      <td>A comment</td>
+    </tr>
+    <tr>
+      <td>(?=...)</td>
+      <td>Positive lookahead</td>
+    </tr>
+    <tr>
+      <td>(?!...)</td>
+      <td>Negative lookahead</td>
+    </tr>
+    <tr>
+      <td>(?&lt;=...)</td>
+      <td>Positive lookbehind</td>
+    </tr>
+    <tr>
+      <td>(?&lt;!...)</td>
+      <td>Negative lookbehind</td>
+    </tr>
+    <tr>
+      <td>(?aiLmsux)</td>
+      <td>Specifies one or more flags. <span class="shaded">a</span> for ASCII-only matching, <span class="shaded">i</span> for ignore case, <span class="shaded">L</span> for locale-dependent, <span class="shaded">m</span> for multi-line, <span class="shaded">s</span> for dot-matches-all, <span class="shaded">u</span> for Unicode matching and <span class="shaded">x</span> for verbose</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(".cheat tr td:first-child").not(".noShading").wrapInner('<span class="shaded"></span>');
+</script>

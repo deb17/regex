@@ -71,4 +71,15 @@
     }
   };
 
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  });
+  $.ajax("/static/cheatsheet.html")
+   .done(function (data) {
+     $('[data-toggle="popover"]').attr("data-content", data); 
+   })
+   .fail(function () {
+     $('[data-toggle="popover"]').attr("data-content", "Could not get data.");
+   });
+
 </script>
