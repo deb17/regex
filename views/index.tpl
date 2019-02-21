@@ -45,7 +45,7 @@
         <textarea name="testdata"></textarea>
       </div>
       <div class="col-lg-2">
-        <button type="button" class="btn btn-info ml-lg-3 mt-2 mt-lg-0" data-toggle="popover" data-placement="top" data-html="true" data-content="">
+        <button type="button" class="btn btn-info ml-lg-3 mt-2 mt-lg-0" data-toggle="popover" data-placement="left" data-html="true" data-content="">
         Cheatsheet
         </button>
       </div>
