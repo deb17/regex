@@ -53,6 +53,11 @@
             <div class="col-sm-6" id="patt">
               <input type="text" class="form-control" name="pattern" spellcheck="false" placeholder="Pattern" maxlength="500" required>
             </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-info mt-2 mt-sm-0" data-toggle="popover" data-placement="bottom" data-html="true" data-content="">
+              Cheatsheet
+              </button>
+            </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-2"></div>
