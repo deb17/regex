@@ -1,6 +1,6 @@
 <style type="text/css">
   .shaded {
-    background-color: lightblue;
+    background-color: #d8ecf3;
   }
   .popover-body {
     height: 350px;
@@ -61,11 +61,11 @@
     </tr>
     <tr>
       <td>{m}</td>
-      <td>Exactly m repetitions</td>
+      <td>Exactly <span class="shaded">m</span> repetitions</td>
     </tr>
     <tr>
       <td>{m,n}</td>
-      <td>m to n repetitions</td>
+      <td><span class="shaded">m</span> to <span class="shaded">n</span> repetitions</td>
     </tr>
     <tr>
       <td>{m,n}?</td>
@@ -92,7 +92,7 @@
     </tr>
     <tr>
       <td class="noShading"><span class="shaded">[a-]</span>,<br><span class="shaded">[-a]</span></td>
-      <td>Matches a or -</td>
+      <td>Matches <span class="shaded">a</span> or <span class="shaded">-</span></td>
     </tr>
     <tr>
       <td>[^abc]</td>
